@@ -38,3 +38,13 @@ bot.on("message", async (msg) => {
 bot.on("polling_error", (error) => {
   console.error("Polling error:", error.message);
 });
+
+// Mantém o serviço acordado no Render
+const http = require("http");
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("GrowthBot DE está vivo!");
+});
+server.listen(process.env.PORT || 3000, () => {
+  console.log("🌐 Servidor HTTP ativo para keep-alive");
+});
