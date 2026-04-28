@@ -28,7 +28,7 @@ bot.on("message", async (msg) => {
   try {
     await bot.sendChatAction(chatId, "typing");
     const reply = await chat(userId, text);
-    await bot.sendMessage(chatId, reply, { parse_mode: "Markdown" });
+    await bot.sendMessage(chatId, reply);
   } catch (error) {
     console.error("Erro:", error.message);
     await bot.sendMessage(chatId, "⚠️ Ein Fehler ist aufgetreten. Bitte versuche es erneut mit /restart");

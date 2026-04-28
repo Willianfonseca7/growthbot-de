@@ -1,6 +1,5 @@
 const OpenAI = require("openai");
 const catalog = require("./catalog");
-require("dotenv").config();
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -34,7 +33,6 @@ WICHTIG:
 - Empfehle immer nur 1 Produkt pro Gespräch
 - Sei freundlich aber direkt
 - Antworte immer auf Deutsch (oder Englisch wenn der Nutzer Englisch schreibt)
-- Wenn du ein Produkt empfiehlst, schreibe GENAU: PRODUKT_EMPFEHLUNG: [nome do produto]
 
 Verfügbare Produkte:
 ${getCatalogText()}`;
@@ -53,7 +51,7 @@ async function chat(userId, userMessage) {
       { role: "system", content: SYSTEM_PROMPT },
       ...history
     ],
-    max_tokens: 500
+    max_tokens: 1000
   });
 
   const reply = response.choices[0].message.content;
