@@ -1,0 +1,341 @@
+const catalog = {
+  camada1: [
+    {
+      nome: "KlickTipp – Email Marketing Software",
+      nicho: ["marketing", "negocio", "vendas", "automacao"],
+      descricao: "Die beste E-Mail-Marketing-Software in Deutschland. Automatisiere dein Business.",
+      comissao: 313,
+      link: "https://www.digistore24.com/redir/38219/wfonsecadigital/"
+    },
+    {
+      nome: "KI-Komplett-System",
+      nicho: ["ia", "tech", "digital", "renda"],
+      descricao: "Das komplette KI-System für mehr Einkommen mit künstlicher Intelligenz.",
+      comissao: 116,
+      link: "https://www.digistore24.com/redir/590882/wfonsecadigital/"
+    },
+    {
+      nome: "Affiliate Marketing Crash Kurs",
+      nicho: ["marketing", "afiliado", "negocio", "renda"],
+      descricao: "Lerne Affiliate Marketing von Grund auf – auch ohne Vorkenntnisse.",
+      comissao: 100,
+      link: "https://www.digistore24.com/redir/456621/wfonsecadigital/"
+    },
+    {
+      nome: "Trading-Code Praxiskurs",
+      nicho: ["trading", "financas", "investimento", "bolsa"],
+      descricao: "Der komplette Trading-Kurs – von Anfänger zum profitablen Trader.",
+      comissao: 209,
+      link: "https://www.digistore24.com/redir/604570/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Makroanalyse für Einsteiger",
+      nicho: ["trading", "financas", "bolsa", "investimento"],
+      descricao: "Verstehe die Märkte wie ein Profi – Makroanalyse leicht erklärt.",
+      comissao: 169,
+      link: "https://www.digistore24.com/redir/670528/wfonsecadigital/"
+    },
+    {
+      nome: "Mentortools",
+      nicho: ["software", "negocio", "curso", "coaching"],
+      descricao: "Dein eigener Mitgliederbereich in 5 Minuten – ohne technisches Wissen.",
+      comissao: 172,
+      link: "https://www.digistore24.com/redir/272490/wfonsecadigital/"
+    },
+    {
+      nome: "Abnehmen - Mindset Shift",
+      nicho: ["saude", "emagrecimento", "bemestar", "mindset"],
+      descricao: "Abnehmen beginnt im Kopf – das Mindset-Programm für nachhaltigen Erfolg.",
+      comissao: 61,
+      link: "https://www.digistore24.com/redir/528752/wfonsecadigital/"
+    },
+    {
+      nome: "AI Influencer System",
+      nicho: ["ia", "tech", "marketing", "renda", "digital"],
+      descricao: "Werde ein KI-Influencer und verdiene online mit künstlicher Intelligenz.",
+      comissao: 115,
+      link: "https://www.digistore24.com/redir/660957/wfonsecadigital/"
+    }
+  ],
+
+  camada2: [
+    {
+      nome: "Nischen Business",
+      nicho: ["negocio", "marketing", "empreendedorismo", "renda"],
+      descricao: "Finde deine profitable Nische und baue ein nachhaltiges Online-Business.",
+      comissao: 90,
+      link: "https://www.digistore24.com/redir/499740/wfonsecadigital/"
+    },
+    {
+      nome: "Social Media Mega Bundle",
+      nicho: ["marketing", "social", "digital", "negocio"],
+      descricao: "Alles was du für Social Media brauchst – Templates, Strategien und mehr.",
+      comissao: 139,
+      link: "https://www.digistore24.com/redir/445726/wfonsecadigital/"
+    },
+    {
+      nome: "100 KI Geld-Methoden",
+      nicho: ["ia", "renda", "digital", "negocio"],
+      descricao: "100 bewährte Methoden, um mit KI Geld zu verdienen.",
+      comissao: 100,
+      link: "https://www.digistore24.com/redir/642057/wfonsecadigital/"
+    },
+    {
+      nome: "Online-Umfragen System",
+      nicho: ["renda", "digital", "negocio"],
+      descricao: "Mit Online-Umfragen Geld verdienen – das komplette System.",
+      comissao: 90,
+      link: "https://www.digistore24.com/redir/614532/wfonsecadigital/"
+    },
+    {
+      nome: "DER PERFORMANCE CODE",
+      nicho: ["produtividade", "carreira", "sucesso", "mindset"],
+      descricao: "Produktivität auf Autopilot – mehr erreichen in weniger Zeit.",
+      comissao: 92,
+      link: "https://www.digistore24.com/redir/611450/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Aktien und ETFs",
+      nicho: ["financas", "investimento", "bolsa", "acoes"],
+      descricao: "Investiere erfolgreich in Aktien und ETFs – auch als Einsteiger.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656974/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Bitcoin, NFTs und Krypto Assets",
+      nicho: ["cripto", "bitcoin", "financas", "investimento"],
+      descricao: "Alles über Bitcoin, NFTs und Krypto-Assets – von Experten erklärt.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656977/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Trading und Investieren",
+      nicho: ["trading", "financas", "investimento"],
+      descricao: "Trading und Investieren meistern – für langfristigen Vermögensaufbau.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656942/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Optionen für Einsteiger",
+      nicho: ["trading", "opcoes", "financas", "bolsa"],
+      descricao: "Optionshandel für Einsteiger – sicher und profitabel handeln.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/655552/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Swingtrading",
+      nicho: ["trading", "financas", "bolsa"],
+      descricao: "Swingtrading meistern – Gewinne auch in volatilen Märkten.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656973/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Technische Analyse",
+      nicho: ["trading", "financas", "bolsa", "analise"],
+      descricao: "Technische Analyse meistern – Charts lesen wie ein Profi.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656945/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Dein Tradingplan",
+      nicho: ["trading", "financas", "planejamento"],
+      descricao: "Erstelle deinen persönlichen Tradingplan für konsistente Gewinne.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/656947/wfonsecadigital/"
+    },
+    {
+      nome: "Pilates and Friends Abo",
+      nicho: ["saude", "fitness", "bemestar", "pilates"],
+      descricao: "Dein Online Pilates Studio – flexibel, effektiv und für jeden geeignet.",
+      comissao: 189,
+      link: "https://www.digistore24.com/redir/23599/wfonsecadigital/"
+    },
+    {
+      nome: "Pilatesliebe - Upgrade für Body. Mind. Soul",
+      nicho: ["saude", "fitness", "bemestar", "pilates"],
+      descricao: "Das Premium Pilates Paket für Körper, Geist und Seele.",
+      comissao: 60,
+      link: "https://www.digistore24.com/redir/328858/wfonsecadigital/"
+    },
+    {
+      nome: "21-Tage-Fit-Kurs",
+      nicho: ["saude", "fitness", "emagrecimento"],
+      descricao: "In 21 Tagen fit werden – das komplette Fitnessprogramm für zuhause.",
+      comissao: 20,
+      link: "https://www.digistore24.com/redir/182939/wfonsecadigital/"
+    },
+    {
+      nome: "Balance 40+ Konzept Exklusiv Premium Paket",
+      nicho: ["saude", "emagrecimento", "mulher", "40mais"],
+      descricao: "Abnehmen und Wohlbefinden für Frauen ab 40 – ganzheitlich und nachhaltig.",
+      comissao: 390,
+      link: "https://www.digistore24.com/redir/386849/wfonsecadigital/"
+    },
+    {
+      nome: "Eigenes Buch schreiben",
+      nicho: ["carreira", "coaching", "negocio", "marketing"],
+      descricao: "Schreibe und veröffentliche dein eigenes Buch – Schritt für Schritt.",
+      comissao: 171,
+      link: "https://www.digistore24.com/redir/601291/wfonsecadigital/"
+    },
+    {
+      nome: "Premium WordPress-Website",
+      nicho: ["tech", "negocio", "digital", "web"],
+      descricao: "Professionelle WordPress-Website – fertig und optimiert für dein Business.",
+      comissao: 396,
+      link: "https://www.digistore24.com/redir/661606/wfonsecadigital/"
+    },
+    {
+      nome: "KI Komplett System - 1€ Testphase",
+      nicho: ["ia", "tech", "digital"],
+      descricao: "Teste das komplette KI-System für nur 1€ – ohne Risiko einsteigen.",
+      comissao: 40,
+      link: "https://www.digistore24.com/redir/592764/wfonsecadigital/"
+    },
+    {
+      nome: "KI Kompendium - Komplettpaket",
+      nicho: ["ia", "tech", "digital", "negocio"],
+      descricao: "Die Plattform für KI-Praxis – alles was du brauchst an einem Ort.",
+      comissao: 99,
+      link: "https://www.digistore24.com/redir/588893/wfonsecadigital/"
+    },
+    {
+      nome: "Affilitracking Tool - Premium",
+      nicho: ["marketing", "afiliado", "negocio", "software"],
+      descricao: "Das professionelle Tracking-Tool für Affiliates und Vendoren.",
+      comissao: 174,
+      link: "https://www.digistore24.com/redir/458439/wfonsecadigital/"
+    },
+    {
+      nome: "Billionärs Club - Privatier Edition",
+      nicho: ["financas", "investimento", "patrimonio", "liberdade"],
+      descricao: "Finanzielle Freiheit durch clevere Investmentstrategien der Reichen.",
+      comissao: 200,
+      link: "https://www.digistore24.com/redir/556138/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Optionen für Fortgeschrittene",
+      nicho: ["trading", "opcoes", "financas", "avancado"],
+      descricao: "Fortgeschrittene Optionsstrategien – für erfahrene Trader.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/655817/wfonsecadigital/"
+    },
+    {
+      nome: "Masterclass Ichimoku Cloud",
+      nicho: ["trading", "financas", "analise", "tecnica"],
+      descricao: "Ichimoku Cloud meistern – die japanische Analysemethode für Trader.",
+      comissao: 48,
+      link: "https://www.digistore24.com/redir/650936/wfonsecadigital/"
+    },
+    {
+      nome: "DAX-Signale Swing Trading",
+      nicho: ["trading", "dax", "financas", "sinais"],
+      descricao: "Professionelle DAX-Handelssignale für Swing Trader.",
+      comissao: 79,
+      link: "https://www.digistore24.com/redir/55185/wfonsecadigital/"
+    },
+    {
+      nome: "Solotool Team",
+      nicho: ["produtividade", "software", "autonomo", "foco"],
+      descricao: "Das Fokus-Tool für Selbstständige – mehr schaffen in weniger Zeit.",
+      comissao: 109,
+      link: "https://www.digistore24.com/redir/561607/wfonsecadigital/"
+    },
+    {
+      nome: "STEINSPARBUCH Coaching Programm",
+      nicho: ["financas", "poupanca", "investimento"],
+      descricao: "Spare und investiere smart – das komplette Coaching für finanzielle Freiheit.",
+      comissao: 100,
+      link: "https://www.digistore24.com/redir/488080/wfonsecadigital/"
+    },
+    {
+      nome: "Deine Wahre ICH Formel",
+      nicho: ["bemestar", "autoconhecimento", "desenvolvimento", "mindset"],
+      descricao: "Entdecke dein wahres Ich und lebe ein erfülltes Leben.",
+      comissao: 124,
+      link: "https://www.digistore24.com/redir/626942/wfonsecadigital/"
+    },
+    {
+      nome: "Wachstumsreise Mama – 1:1 Coaching",
+      nicho: ["coaching", "mae", "desenvolvimento", "bemestar"],
+      descricao: "Persönliches Coaching für Mamas – Wachstum und Erfüllung im Alltag.",
+      comissao: 165,
+      link: "https://www.digistore24.com/redir/614900/wfonsecadigital/"
+    }
+  ],
+
+  camada3: [
+    {
+      nome: "Webinaris VIP Flatrate",
+      nicho: ["marketing", "negocio", "automacao", "webinar"],
+      descricao: "Automatisierte Webinare auf Autopilot – die Nr. 1 Plattform im DACH-Raum.",
+      comissao: 260,
+      link: "https://www.digistore24.com/redir/432363/wfonsecadigital/"
+    },
+    {
+      nome: "Mission: Digitale Freiheit – KI-Business",
+      nicho: ["ia", "negocio", "digital", "empreendedorismo", "liberdade"],
+      descricao: "Dein fertiges KI-Business – von der Idee zur digitalen Freiheit.",
+      comissao: 419,
+      link: "https://www.digistore24.com/redir/622854/wfonsecadigital/"
+    },
+    {
+      nome: "Mitgliedschaft No Limit Club",
+      nicho: ["investimento", "imoveis", "financas", "patrimonio"],
+      descricao: "Exklusive Mitgliedschaft für Immobilien-Investoren und Finanzexperten.",
+      comissao: 192,
+      link: "https://www.digistore24.com/redir/608197/wfonsecadigital/"
+    },
+    {
+      nome: "Longevity Coaching 60 Tage",
+      nicho: ["saude", "longevidade", "bemestar", "epigenetica"],
+      descricao: "60 Tage Coaching für ewige Jugend – mit Epigenetik und moderner Wissenschaft.",
+      comissao: 660,
+      link: "https://www.digistore24.com/redir/520706/wfonsecadigital/"
+    },
+    {
+      nome: "Longevity Coaching 30 Tage",
+      nicho: ["saude", "longevidade", "bemestar"],
+      descricao: "30 Tage Coaching für mehr Vitalität und Jugendlichkeit.",
+      comissao: 360,
+      link: "https://www.digistore24.com/redir/517516/wfonsecadigital/"
+    },
+    {
+      nome: "RESPIRE Academy ESSENTIAL",
+      nicho: ["stress", "bemestar", "saude", "respiracao"],
+      descricao: "Stress dauerhaft reduzieren – das wissenschaftlich fundierte Programm.",
+      comissao: 584,
+      link: "https://www.digistore24.com/redir/669447/wfonsecadigital/"
+    },
+    {
+      nome: "Neue Methode: Abnehmen ohne Sport",
+      nicho: ["saude", "emagrecimento", "bemestar"],
+      descricao: "Die neue Methode zum Abnehmen – ohne Sport, ohne Hunger.",
+      comissao: 489,
+      link: "https://www.digistore24.com/redir/509326/wfonsecadigital/"
+    },
+    {
+      nome: "AI Influencer - Autopilot System",
+      nicho: ["ia", "tech", "marketing", "automacao"],
+      descricao: "Das komplette KI-Influencer System auf Autopilot.",
+      comissao: 115,
+      link: "https://www.digistore24.com/redir/661491/wfonsecadigital/"
+    },
+    {
+      nome: "Selbstlernkurs The Work von Byron Katie",
+      nicho: ["bemestar", "mindset", "autoconhecimento", "desenvolvimento"],
+      descricao: "The Work von Byron Katie – Gedanken auflösen und frei werden.",
+      comissao: 157,
+      link: "https://www.digistore24.com/redir/211519/wfonsecadigital/"
+    },
+    {
+      nome: "Index Daytrading Peter Spiegel",
+      nicho: ["trading", "daytrading", "financas", "sinais"],
+      descricao: "Professionelle Index-Daytrading-Signale von Peter Spiegel.",
+      comissao: 81,
+      link: "https://www.digistore24.com/redir/467093/wfonsecadigital/"
+    }
+  ]
+};
+
+module.exports = catalog;
