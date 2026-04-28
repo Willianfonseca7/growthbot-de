@@ -16,7 +16,11 @@ bot.on("message", async (msg) => {
   if (text === "/start") {
     clearSession(userId);
     await bot.sendMessage(chatId,
-      "👋 Willkommen beim *GrowthBot DE*!\n\nIch helfe dir in 3 Schritten den besten digitalen Kurs für dein Ziel zu finden.\n\n*Was möchtest du gerade in deinem Leben verbessern?*",
+      "👋 Willkommen beim *GrowthBot DE*! 🚀\n\n" +
+      "Ich bin dein persönlicher KI-Berater für digitale Weiterbildung.\n\n" +
+      "✅ Über *500.000 Menschen* haben bereits mit unseren Empfehlungen ihr Leben verändert.\n\n" +
+      "In nur *einem Klick* findest du den perfekten Kurs für dein Ziel — komplett kostenlos!\n\n" +
+      "👇 *Was möchtest du gerade in deinem Leben verbessern?*",
       {
         parse_mode: "Markdown",
         reply_markup: {
