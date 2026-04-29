@@ -17,13 +17,16 @@ function runFollowUpJob() {
   `).all(agora);
 
   for (const lead of pendentes) {
+    const baseUrl = process.env.RENDER_EXTERNAL_URL || "https://growthbot-de.onrender.com";
+    const linkRastreado = `${baseUrl}/redirect?id=${encodeURIComponent(lead.produto_id)}&user=${encodeURIComponent(lead.user_id)}&url=${encodeURIComponent(lead.produto_link)}`;
+
     const mensagem =
       `⏰ *Hallo nochmal!*\n\n` +
       `Du hattest gestern Interesse an *${lead.produto_nome}* gezeigt.\n\n` +
       `🎁 *Exklusiver Bonus nur für dich:* Wenn du dich heute noch anmeldest, ` +
       `bekommst du Zugang zu einem kostenlosen Bonus-Modul, das nur für schnelle Entscheider verfügbar ist.\n\n` +
       `⚡ *Dieses Angebot gilt nur für die nächsten 24 Stunden.*\n\n` +
-      `👉 Hier geht's direkt zum Kurs:\n${lead.produto_link}`;
+      `👉 Hier geht's direkt zum Kurs:\n${linkRastreado}`;
 
     bot.sendMessage(lead.user_id, mensagem, { parse_mode: "Markdown" })
       .then(() => {
