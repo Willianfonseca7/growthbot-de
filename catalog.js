@@ -26,7 +26,7 @@ const catalog = {
       nicho: ["trading", "financas", "investimento", "bolsa"],
       descricao: "Der komplette Trading-Kurs – von Anfänger zum profitablen Trader.",
       comissao: 209,
-      link: "https://www.digistore24.com/redir/604570/wfonsecadigital/"
+      link: "https://dertradingcode.de/kurs/#aff=wfonsecadigital"
     },
     {
       nome: "Masterclass Makroanalyse für Einsteiger",
