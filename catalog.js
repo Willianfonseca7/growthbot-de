@@ -253,7 +253,7 @@ const catalog = {
       nicho: ["bemestar", "autoconhecimento", "desenvolvimento", "mindset"],
       descricao: "Entdecke dein wahres Ich und lebe ein erfülltes Leben.",
       comissao: 124,
-      link: "https://www.digistore24.com/redir/626942/wfonsecadigital/"
+      link: "https://www.checkout-ds24.com/redir/626942/wfonsecadigital/"
     },
     {
       nome: "Wachstumsreise Mama – 1:1 Coaching",
