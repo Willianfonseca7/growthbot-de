@@ -29,6 +29,8 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS followups (
     user_id TEXT PRIMARY KEY,
     produto_id TEXT,
+    produto_nome TEXT,
+    produto_link TEXT,
     scheduled_at INTEGER NOT NULL,
     sent INTEGER NOT NULL DEFAULT 0
   )

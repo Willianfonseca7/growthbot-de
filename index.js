@@ -1,11 +1,46 @@
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 const { chat, clearSession } = require("./conversation");
+const db = require("./database");
 
 const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
 
 console.log("🤖 GrowthBot DE está rodando...");
 
+// ─── FOLLOW-UP JOB — roda a cada hora ───────────────────────────────────────
+function runFollowUpJob() {
+  const agora = Math.floor(Date.now() / 1000);
+
+  const pendentes = db.prepare(`
+    SELECT * FROM followups
+    WHERE sent = 0 AND scheduled_at <= ?
+  `).all(agora);
+
+  for (const lead of pendentes) {
+    const mensagem =
+      `⏰ *Hallo nochmal!*\n\n` +
+      `Du hattest gestern Interesse an *${lead.produto_nome}* gezeigt.\n\n` +
+      `🎁 *Exklusiver Bonus nur für dich:* Wenn du dich heute noch anmeldest, ` +
+      `bekommst du Zugang zu einem kostenlosen Bonus-Modul, das nur für schnelle Entscheider verfügbar ist.\n\n` +
+      `⚡ *Dieses Angebot gilt nur für die nächsten 24 Stunden.*\n\n` +
+      `👉 Hier geht's direkt zum Kurs:\n${lead.produto_link}`;
+
+    bot.sendMessage(lead.user_id, mensagem, { parse_mode: "Markdown" })
+      .then(() => {
+        db.prepare("UPDATE followups SET sent = 1 WHERE user_id = ?").run(lead.user_id);
+        console.log(`✅ Follow-up enviado para ${lead.user_id}`);
+      })
+      .catch((err) => {
+        console.error(`❌ Erro ao enviar follow-up para ${lead.user_id}:`, err.message);
+      });
+  }
+}
+
+// Roda imediatamente ao iniciar e depois a cada hora
+runFollowUpJob();
+setInterval(runFollowUpJob, 60 * 60 * 1000);
+
+// ─── BOT HANDLERS ────────────────────────────────────────────────────────────
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const userId = String(chatId);
@@ -93,18 +128,16 @@ bot.on("polling_error", (error) => {
   console.error("Polling error:", error.message);
 });
 
+// ─── SERVIDOR HTTP — keep-alive + redirect tracker ───────────────────────────
 const http = require("http");
-const db = require("./database");
 
 const server = http.createServer((req, res) => {
-  // Redirect tracker — /redirect?id=produto&user=userId&url=linkAfiliado
   if (req.url.startsWith("/redirect")) {
     const params = new URL(req.url, "http://localhost").searchParams;
     const produtoId = params.get("id") || "unknown";
     const userId = params.get("user") || "unknown";
     const url = params.get("url");
 
-    // Registra o clique
     db.prepare(`
       INSERT INTO clicks (user_id, produto_id) VALUES (?, ?)
     `).run(userId, produtoId);
@@ -119,7 +152,6 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Keep-alive padrão
   res.writeHead(200);
   res.end("GrowthBot DE está vivo!");
 });

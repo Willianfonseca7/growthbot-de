@@ -1,9 +1,8 @@
 const OpenAI = require("openai");
 const catalog = require("./catalog");
+const db = require("./database");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-const sessions = new Map();
 
 function getCatalogText() {
   const todos = [
@@ -41,12 +40,26 @@ WICHTIG:
 Verfügbare Produkte:
 ${getCatalogText()}`;
 
-async function chat(userId, userMessage) {
-  if (!sessions.has(userId)) {
-    sessions.set(userId, []);
+// Detecta se a resposta contém uma recomendação de produto
+function detectarProdutoRecomendado(reply) {
+  const todos = [
+    ...catalog.camada1,
+    ...catalog.camada2,
+    ...catalog.camada3
+  ];
+  for (const produto of todos) {
+    if (reply.includes(produto.link) || reply.includes(produto.nome)) {
+      return produto;
+    }
   }
+  return null;
+}
 
-  const history = sessions.get(userId);
+async function chat(userId, userMessage) {
+  // Busca sessão do banco
+  let row = db.prepare("SELECT history FROM sessions WHERE user_id = ?").get(userId);
+  let history = row ? JSON.parse(row.history) : [];
+
   history.push({ role: "user", content: userMessage });
 
   const response = await openai.chat.completions.create({
@@ -61,11 +74,37 @@ async function chat(userId, userMessage) {
   const reply = response.choices[0].message.content;
   history.push({ role: "assistant", content: reply });
 
+  // Salva sessão atualizada no banco
+  db.prepare(`
+    INSERT INTO sessions (user_id, history, updated_at)
+    VALUES (?, ?, unixepoch())
+    ON CONFLICT(user_id) DO UPDATE SET
+      history = excluded.history,
+      updated_at = excluded.updated_at
+  `).run(userId, JSON.stringify(history));
+
+  // Se o bot recomendou um produto, agenda follow-up 24h
+  const produto = detectarProdutoRecomendado(reply);
+  if (produto) {
+    const scheduledAt = Math.floor(Date.now() / 1000) + 86400; // +24h
+    db.prepare(`
+      INSERT INTO followups (user_id, produto_id, produto_nome, produto_link, scheduled_at, sent)
+      VALUES (?, ?, ?, ?, ?, 0)
+      ON CONFLICT(user_id) DO UPDATE SET
+        produto_id = excluded.produto_id,
+        produto_nome = excluded.produto_nome,
+        produto_link = excluded.produto_link,
+        scheduled_at = excluded.scheduled_at,
+        sent = 0
+    `).run(userId, produto.nome, produto.nome, produto.link, scheduledAt);
+  }
+
   return reply;
 }
 
 function clearSession(userId) {
-  sessions.delete(userId);
+  db.prepare("DELETE FROM sessions WHERE user_id = ?").run(userId);
+  db.prepare("DELETE FROM followups WHERE user_id = ?").run(userId);
 }
 
 module.exports = { chat, clearSession };
