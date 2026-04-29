@@ -93,12 +93,37 @@ bot.on("polling_error", (error) => {
   console.error("Polling error:", error.message);
 });
 
-// Mantém o serviço acordado no Render
 const http = require("http");
-const server = http.createServer((_req, res) => {
+const db = require("./database");
+
+const server = http.createServer((req, res) => {
+  // Redirect tracker — /redirect?id=produto&user=userId&url=linkAfiliado
+  if (req.url.startsWith("/redirect")) {
+    const params = new URL(req.url, "http://localhost").searchParams;
+    const produtoId = params.get("id") || "unknown";
+    const userId = params.get("user") || "unknown";
+    const url = params.get("url");
+
+    // Registra o clique
+    db.prepare(`
+      INSERT INTO clicks (user_id, produto_id) VALUES (?, ?)
+    `).run(userId, produtoId);
+
+    if (url) {
+      res.writeHead(302, { Location: url });
+      res.end();
+    } else {
+      res.writeHead(400);
+      res.end("URL não informada");
+    }
+    return;
+  }
+
+  // Keep-alive padrão
   res.writeHead(200);
   res.end("GrowthBot DE está vivo!");
 });
+
 server.listen(process.env.PORT || 3000, () => {
   console.log("🌐 Servidor HTTP ativo para keep-alive");
 });
