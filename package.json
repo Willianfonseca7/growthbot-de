@@ -1,19 +1,44 @@
 {
   "name": "growthbot-de",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Telegram-based LLM sales assistant for the DACH market",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "dev:bot": "tsx watch src/bot.ts",
+    "build": "next build",
+    "start": "next start",
+    "bot:start": "tsx src/bot.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
-  "keywords": [],
+  "keywords": [
+    "telegram",
+    "llm",
+    "sales-assistant",
+    "affiliate",
+    "growthbot"
+  ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "better-sqlite3": "^12.9.0",
     "dotenv": "^17.4.2",
+    "next": "^15.5.2",
     "node-telegram-bot-api": "^0.67.0",
-    "openai": "^6.35.0"
+    "openai": "^6.35.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.3.0",
+    "@types/node-telegram-bot-api": "^0.64.8",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   }
 }
