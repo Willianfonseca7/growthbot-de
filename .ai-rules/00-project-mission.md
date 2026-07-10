@@ -201,6 +201,41 @@ Toda mudança importante no projeto deve responder a pelo menos uma destas pergu
 
 Se a resposta for não, a mudança pode estar introduzindo esforço sem reforçar a identidade real do GrowthBot DE.
 
+## Project Mission Decision Framework
+
+Antes de introduzir mudança estratégica relevante, deve ser possível responder:
+
+1. isso reforça o GrowthBot DE como AI Sales Platform?
+2. isso transforma intenção em valor de forma mais clara?
+3. isso melhora usuário, operador, empresa ou parceiros?
+4. isso fortalece confiança, clareza ou mensuração?
+5. existe risco de reduzir o produto a chatbot ou integração isolada?
+6. essa decisão preserva a visão de longo prazo?
+
+## Project Mission Anti-Patterns
+
+Nunca:
+
+- tratar o GrowthBot DE como chatbot simples
+- otimizar apenas para conversão imediata
+- usar IA sem propósito claro
+- introduzir mudanças que enfraquecem confiança
+- crescer por acúmulo de features desconectadas
+
+## Future Compatibility
+
+A missão do produto deve permanecer compatível com a evolução futura da plataforma para contextos mais amplos de operação comercial, automação, mensuração e coordenação orientada por IA.
+
+## Definition of Done
+
+Uma decisão estratégica só pode ser considerada coerente com a missão quando:
+
+- reforça a identidade do produto
+- aumenta valor real ou capacidade futura clara
+- preserva confiança
+- não contradiz a visão de longo prazo
+- evita anti-patterns estratégicos
+
 ## Checklist
 
 - A decisão proposta reforça o GrowthBot DE como AI Sales Platform?

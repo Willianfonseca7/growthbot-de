@@ -285,6 +285,41 @@ Uma mudança estrutural só deve ser considerada boa quando melhora pelo menos a
 
 Mudanças que apenas “parecem mais sofisticadas” não são melhorias arquiteturais por si só.
 
+## Architecture Decision Framework
+
+Antes de introduzir mudança estrutural relevante, deve ser possível responder:
+
+1. qual boundary está sendo afetado?
+2. a responsabilidade está no módulo correto?
+3. a mudança reduz ou aumenta acoplamento?
+4. existe abstração desnecessária?
+5. a evolução futura fica mais fácil ou mais difícil?
+6. a arquitetura ficou mais clara ou apenas mais sofisticada?
+
+## Architecture Anti-Patterns
+
+Nunca:
+
+- misturar domínio com framework
+- espalhar persistência pela aplicação
+- criar abstrações sem necessidade real
+- usar módulo genérico como depósito de lógica
+- sacrificar clareza por sofisticação aparente
+
+## Future Compatibility
+
+A arquitetura deve permanecer compatível com crescimento incremental da plataforma, múltiplos canais, múltiplos modelos, múltiplos runtimes, serviços mais distribuídos e maior observabilidade operacional.
+
+## Definition of Done
+
+Uma mudança arquitetural só pode ser considerada concluída quando:
+
+- respeita boundaries claros
+- reduz ou controla acoplamento
+- melhora clareza e manutenção
+- preserva testabilidade e observabilidade
+- evita anti-patterns arquiteturais
+
 ## Checklist
 
 - A mudança respeita fronteiras de domínio?
