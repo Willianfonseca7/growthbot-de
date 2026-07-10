@@ -45,6 +45,14 @@ main {
   gap: 24px;
 }
 
+.hero__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .hero {
   display: grid;
   gap: 24px;
@@ -235,6 +243,35 @@ main {
   background: rgba(19, 37, 61, 0.9);
   color: var(--text);
   font-size: 0.92rem;
+}
+
+.locale-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(19, 37, 61, 0.78);
+}
+
+.locale-switcher__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.locale-switcher__link--active {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.95), rgba(91, 199, 255, 0.88));
+  color: #f8fbff;
 }
 
 .metric-grid {
