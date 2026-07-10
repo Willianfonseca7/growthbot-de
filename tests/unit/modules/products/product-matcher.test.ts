@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { matchProducts } from "./product-matcher";
+import { matchProducts } from "../../../../src/modules/products/product-matcher";
 
 describe("matchProducts", () => {
   it("returns finance products for finance intent", () => {

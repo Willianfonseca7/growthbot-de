@@ -1,96 +1,88 @@
-import { ActivityTable } from "../components/dashboard/ActivityTable";
-import { MetricCard } from "../components/dashboard/MetricCard";
-import { SectionCard } from "../components/dashboard/SectionCard";
-import { getDashboardData } from "../lib/dashboard-data";
-import { formatDateTime } from "../lib/format";
-
 export default function HomePage() {
-  const { metrics, sessions, followUps, clicks } = getDashboardData();
-
   return (
-    <main>
-      <section className="hero">
-        <span className="hero__eyebrow">GrowthBot DE Platform</span>
-        <h1>LLM sales orchestration with a real operator dashboard.</h1>
-        <p>
-          This platform now separates intent detection, product matching, prompt construction,
-          response generation, follow-up scheduling, and click tracking while exposing the
-          operational state through a Next.js admin surface.
-        </p>
-        <div className="hero__badges">
-          <span className="badge">Telegram Bot Runtime</span>
-          <span className="badge">Next.js Admin</span>
-          <span className="badge">Structured LLM Flow</span>
+    <main className="public-main">
+      <section className="public-hero">
+        <div className="public-hero__copy">
+          <span className="hero__eyebrow">GrowthBot DE Live</span>
+          <h1>From Telegram chatbot to AI sales platform.</h1>
+          <p>
+            GrowthBot DE is a recruiter-safe live surface for a platform that combines intent
+            detection, product matching, structured LLM orchestration, affiliate tracking,
+            follow-up automation, and operational visibility.
+          </p>
+          <div className="hero__badges">
+            <span className="badge">Telegram Runtime</span>
+            <span className="badge">Next.js Surface</span>
+            <span className="badge">Structured AI Flow</span>
+            <span className="badge">Protected Ops Dashboard</span>
+          </div>
+          <div className="public-actions">
+            <a className="cta cta--primary" href="/api/health">Live Health Endpoint</a>
+            <a className="cta cta--secondary" href="/ops">Protected Ops Surface</a>
+          </div>
+          <p className="public-note">
+            The public landing is intentionally separated from the operational dashboard. Sensitive
+            runtime data stays behind protected access.
+          </p>
+        </div>
+        <div className="public-hero__panel">
+          <div className="signal-card">
+            <span className="signal-card__label">Public Mode</span>
+            <strong>Recruiter-safe live view</strong>
+            <p>Architecture, capabilities, health status, and platform positioning without exposing internal operational data.</p>
+          </div>
+          <div className="signal-card">
+            <span className="signal-card__label">Private Mode</span>
+            <strong>Ops dashboard behind auth</strong>
+            <p>Sessions, clicks, follow-ups, and runtime visibility are separated into a protected surface.</p>
+          </div>
         </div>
       </section>
 
-      <div className="metric-grid">
-        <MetricCard label="Active Sessions" value={metrics.totalSessions} hint="Persisted conversation threads in SQLite." />
-        <MetricCard label="Tracked Clicks" value={metrics.totalClicks} hint="Affiliate redirect events captured through Next route handlers." />
-        <MetricCard label="Pending Follow-ups" value={metrics.pendingFollowUps} hint="Leads queued for re-engagement by the bot worker." />
-        <MetricCard label="Sent Follow-ups" value={metrics.sentFollowUps} hint="Completed follow-up deliveries registered in storage." />
-      </div>
+      <section className="public-grid">
+        <article className="showcase-card">
+          <span className="showcase-card__eyebrow">System Shape</span>
+          <h2>What is live in this project</h2>
+          <ul className="feature-list">
+            <li>Telegram bot runtime for conversational entry</li>
+            <li>Intent classification and product matching</li>
+            <li>Prompt builder plus OpenAI recommendation flow</li>
+            <li>Affiliate redirect tracking route</li>
+            <li>Follow-up scheduling model</li>
+            <li>Protected operational dashboard surface</li>
+          </ul>
+        </article>
 
-      <div className="section-grid">
-        <SectionCard
-          title="Platform Architecture"
-          description="Current runtime split between conversational orchestration and operator visibility."
-        >
+        <article className="showcase-card">
+          <span className="showcase-card__eyebrow">Architecture</span>
+          <h2>Core platform split</h2>
           <div className="stack-list">
-            <div><strong>Channel:</strong> <span>Telegram adapter for messages and callbacks</span></div>
-            <div><strong>Core:</strong> <span>Intent classifier, product matcher, conversation orchestrator</span></div>
-            <div><strong>LLM:</strong> <span>Prompt builder plus structured OpenAI provider layer</span></div>
-            <div><strong>Admin:</strong> <span>Next.js app router, metrics dashboard and tracking routes</span></div>
-            <div><strong>Storage:</strong> <span>SQLite sessions, clicks and follow-up state</span></div>
+            <div><strong>Conversation:</strong> <span>Telegram adapter and conversation orchestrator</span></div>
+            <div><strong>Decision Flow:</strong> <span>Intent → candidates → prompt → structured recommendation</span></div>
+            <div><strong>Operations:</strong> <span>Tracking, follow-up queue, health endpoint, ops visibility</span></div>
+            <div><strong>Persistence:</strong> <span>SQLite sessions, clicks and follow-up state</span></div>
           </div>
-        </SectionCard>
+        </article>
 
-        <SectionCard
-          title="Recent Sessions"
-          description="Latest conversations stored by the orchestrator."
-        >
-          <ActivityTable
-            items={sessions}
-            emptyText="No sessions stored yet."
-            columns={[
-              { key: "user", title: "User", render: (item) => item.userId },
-              { key: "message", title: "Last Message", render: (item) => item.lastMessage },
-              { key: "updated", title: "Updated", render: (item) => formatDateTime(item.updatedAt) }
-            ]}
-          />
-        </SectionCard>
-
-        <SectionCard
-          title="Follow-up Queue"
-          description="Products and users currently tracked for re-engagement."
-        >
-          <ActivityTable
-            items={followUps}
-            emptyText="No follow-ups scheduled."
-            columns={[
-              { key: "user", title: "User", render: (item) => item.user_id },
-              { key: "product", title: "Product", render: (item) => item.produto_nome },
-              { key: "status", title: "Status", render: (item) => (item.sent ? "Sent" : "Pending") },
-              { key: "scheduled", title: "Scheduled", render: (item) => formatDateTime(item.scheduled_at) }
-            ]}
-          />
-        </SectionCard>
-
-        <SectionCard
-          title="Recent Clicks"
-          description="Latest affiliate redirect events recorded by the platform."
-        >
-          <ActivityTable
-            items={clicks}
-            emptyText="No click tracking data yet."
-            columns={[
-              { key: "user", title: "User", render: (item) => item.userId },
-              { key: "product", title: "Product ID", render: (item) => item.productId },
-              { key: "clicked", title: "Clicked", render: (item) => formatDateTime(item.clickedAt) }
-            ]}
-          />
-        </SectionCard>
-      </div>
+        <article className="showcase-card showcase-card--wide">
+          <span className="showcase-card__eyebrow">Recruiter Access Model</span>
+          <h2>Public first, operational second</h2>
+          <div className="flow-steps">
+            <div className="flow-step">
+              <strong>1. Public landing</strong>
+              <p>Live product positioning, architecture view, and health endpoint remain public.</p>
+            </div>
+            <div className="flow-step">
+              <strong>2. Protected ops</strong>
+              <p>Internal sessions, clicks and follow-ups stay behind server-side basic auth.</p>
+            </div>
+            <div className="flow-step">
+              <strong>3. Controlled demo</strong>
+              <p>Recruiters can see that the project is real without exposing raw operational data by default.</p>
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
   );
 }

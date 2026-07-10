@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "GrowthBot DE",
-  description: "LLM-powered sales assistant platform for Telegram and internal operations"
+  description: "Recruiter-safe live surface for the GrowthBot DE AI sales platform"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

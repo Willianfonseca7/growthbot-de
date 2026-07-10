@@ -8,7 +8,7 @@ const envSchema = z.object({
   TELEGRAM_TOKEN: z.string().min(1),
   OPENAI_MODEL: z.string().default("gpt-4o-mini"),
   PORT: z.coerce.number().default(3000),
-  RENDER_EXTERNAL_URL: z.string().url().optional()
+  APP_BASE_URL: z.string().url().optional()
 });
 
 export const env = envSchema.parse(process.env);

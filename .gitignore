@@ -4,3 +4,6 @@ dist/
 .env
 growthbot.db
 tsconfig.tsbuildinfo
+coverage/
+playwright-report/
+test-results/

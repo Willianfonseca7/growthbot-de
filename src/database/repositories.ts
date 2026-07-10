@@ -119,3 +119,27 @@ export function getRecentClicks(limit = 5): ClickRecord[] {
     clickedAt: (row as { clicked_at: number }).clicked_at
   }));
 }
+
+export function claimTelegramWebhookUpdate(updateId: number): boolean {
+  const result = db.prepare(`
+    INSERT OR IGNORE INTO telegram_webhook_updates (update_id, status, created_at, updated_at)
+    VALUES (?, 'processing', unixepoch(), unixepoch())
+  `).run(updateId);
+
+  return result.changes > 0;
+}
+
+export function completeTelegramWebhookUpdate(updateId: number): void {
+  db.prepare(`
+    UPDATE telegram_webhook_updates
+    SET status = 'completed', updated_at = unixepoch()
+    WHERE update_id = ?
+  `).run(updateId);
+}
+
+export function releaseTelegramWebhookUpdate(updateId: number): void {
+  db.prepare(`
+    DELETE FROM telegram_webhook_updates
+    WHERE update_id = ? AND status = 'processing'
+  `).run(updateId);
+}

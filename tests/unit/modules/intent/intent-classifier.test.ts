@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { classifyIntent } from "./intent-classifier";
+import { classifyIntent } from "../../../../src/modules/intent/intent-classifier";
 
 describe("classifyIntent", () => {
   it("detects finance intent", () => {

@@ -7,7 +7,7 @@ export async function runFollowUpJob(bot: TelegramBot): Promise<void> {
   const pendingFollowUps = getPendingFollowUps(nowUnix);
 
   for (const lead of pendingFollowUps) {
-    const baseUrl = env.RENDER_EXTERNAL_URL ?? "http://localhost:3000";
+    const baseUrl = env.APP_BASE_URL ?? "http://localhost:3000";
     const trackedLink = `${baseUrl}/api/redirect?id=${encodeURIComponent(lead.produto_id)}&user=${encodeURIComponent(lead.user_id)}&url=${encodeURIComponent(lead.produto_link)}`;
 
     const message =
