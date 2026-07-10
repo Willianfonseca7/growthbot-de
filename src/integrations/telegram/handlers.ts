@@ -1,5 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 import { chat, clearSession } from "../../modules/conversation/orchestrator";
+import { classifyIntent } from "../../modules/intent/intent-classifier";
 
 const nicheMessageMap: Record<string, string> = {
   nicho_financas: "Ich möchte meine Finanzen verbessern und mehr Geld verdienen.",
@@ -30,6 +31,31 @@ const welcomeKeyboard: TelegramBot.SendMessageOptions["reply_markup"] = {
       { text: "🧠 Persönlichkeit & Mindset", callback_data: "nicho_mindset" }
     ]
   ]
+};
+
+const topicSelectionMessage =
+  "Wählen Sie bitte direkt ein Thema aus, damit ich Ihnen schneller etwas Passendes empfehlen kann.";
+
+const shortInputMessage =
+  "Bitte wählen Sie kurz ein Thema oder schreiben Sie 3 bis 5 Wörter, zum Beispiel: KI für Einsteiger, ETFs lernen oder Social Media Marketing.";
+
+const topicSelectionOptions: TelegramBot.SendMessageOptions = {
+  parse_mode: "Markdown",
+  reply_markup: welcomeKeyboard
+};
+
+const directShortcutMap: Record<string, string> = {
+  ki: "Ich interessiere mich für Technologie und künstliche Intelligenz.",
+  ai: "Ich interessiere mich für Technologie und künstliche Intelligenz.",
+  finanzen: "Ich möchte meine Finanzen verbessern und mehr Geld verdienen.",
+  geld: "Ich möchte meine Finanzen verbessern und mehr Geld verdienen.",
+  health: "Ich möchte meine Gesundheit verbessern und fitter werden.",
+  gesundheit: "Ich möchte meine Gesundheit verbessern und fitter werden.",
+  fitness: "Ich möchte meine Gesundheit verbessern und fitter werden.",
+  marketing: "Ich möchte Marketing und Social Media lernen.",
+  karriere: "Ich möchte meine Karriere voranbringen und ein erfolgreiches Business aufbauen.",
+  business: "Ich möchte meine Karriere voranbringen und ein erfolgreiches Business aufbauen.",
+  mindset: "Ich möchte meine Persönlichkeit entwickeln und mein Mindset verbessern."
 };
 
 export type TelegramTransport = {
@@ -95,6 +121,43 @@ function logTelegramHandlerError(
   });
 }
 
+function normalizeTelegramReply(reply: string): string {
+  return reply
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, "$1: $2")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\*(.*?)\*/g, "$1")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function isShortAmbiguousInput(text: string): boolean {
+  const normalized = text.trim().toLowerCase();
+  if (normalized.length === 0) {
+    return false;
+  }
+
+  if (directShortcutMap[normalized]) {
+    return false;
+  }
+
+  return normalized.length <= 2;
+}
+
+function resolveUserIntentSeed(text: string): string | null {
+  const normalized = text.trim().toLowerCase();
+
+  if (directShortcutMap[normalized]) {
+    return directShortcutMap[normalized];
+  }
+
+  const intent = classifyIntent(text);
+  if (intent.label === "geral") {
+    return null;
+  }
+
+  return text;
+}
+
 export async function handleTelegramMessage(
   transport: TelegramTransport,
   message: TelegramBot.Message,
@@ -119,14 +182,25 @@ export async function handleTelegramMessage(
 
   if (text === "/restart") {
     clearSession(userId);
-    await transport.sendMessage(chatId, "🔄 Gespräch neu gestartet! Was möchtest du verbessern?");
+    await transport.sendMessage(chatId, "🔄 Gespräch neu gestartet.", topicSelectionOptions);
+    return;
+  }
+
+  if (isShortAmbiguousInput(text)) {
+    await transport.sendMessage(chatId, shortInputMessage, topicSelectionOptions);
+    return;
+  }
+
+  const seededIntentMessage = resolveUserIntentSeed(text);
+  if (!seededIntentMessage) {
+    await transport.sendMessage(chatId, topicSelectionMessage, topicSelectionOptions);
     return;
   }
 
   try {
     await transport.sendChatAction(chatId, "typing");
-    const reply = await chat(userId, text);
-    await transport.sendMessage(chatId, reply, { parse_mode: "Markdown" });
+    const reply = await chat(userId, seededIntentMessage);
+    await transport.sendMessage(chatId, normalizeTelegramReply(reply));
   } catch (error) {
     logTelegramHandlerError(
       "Telegram message handler",
@@ -135,7 +209,8 @@ export async function handleTelegramMessage(
     );
     await transport.sendMessage(
       chatId,
-      "⚠️ Ein Fehler ist aufgetreten. Bitte versuche es erneut mit /restart"
+      "⚠️ Ein Fehler ist aufgetreten. Bitte wählen Sie ein Thema erneut oder nutzen Sie /restart.",
+      topicSelectionOptions
     );
   }
 }
@@ -162,7 +237,7 @@ export async function handleTelegramCallbackQuery(
   try {
     await transport.sendChatAction(chatId, "typing");
     const reply = await chat(String(chatId), mappedMessage);
-    await transport.sendMessage(chatId, reply, { parse_mode: "Markdown" });
+    await transport.sendMessage(chatId, normalizeTelegramReply(reply));
   } catch (error) {
     logTelegramHandlerError(
       "Telegram callback handler",
@@ -171,7 +246,8 @@ export async function handleTelegramCallbackQuery(
     );
     await transport.sendMessage(
       chatId,
-      "⚠️ Ein Fehler ist aufgetreten. Bitte versuche es erneut mit /restart"
+      "⚠️ Ein Fehler ist aufgetreten. Bitte wählen Sie ein Thema erneut oder nutzen Sie /restart.",
+      topicSelectionOptions
     );
   }
 }
